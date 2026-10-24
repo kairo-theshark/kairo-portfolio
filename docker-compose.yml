@@ -1,0 +1,39 @@
+services:
+  portfolio:
+    build: .
+    container_name: portfolio
+    restart: unless-stopped
+    env_file: .env
+    # Internal port only. Do not add `ports:` here: publishing to the host
+    # (especially 0.0.0.0) bypasses UFW. NPM reaches the container over the
+    # shared Docker network.
+    expose:
+      - "3000"
+    networks:
+      - npm
+      - beszel
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+          pids: 200
+
+# Both networks are external stacks: the names below must match the real
+# Docker networks used by NPM and Beszel on the server.
+networks:
+  npm:
+    external: true
+    name: nginx-proxy-manager_default
+  beszel:
+    external: true
+    name: beszel_default

@@ -1,0 +1,39 @@
+# Dependencies and build output are produced inside the image.
+node_modules
+.next
+output
+*.tsbuildinfo
+
+# Secrets: the container receives them through env_file, never through the build.
+.env
+.env.*
+!.env.example
+
+# Local tooling and VCS metadata.
+.git
+.gitignore
+.github
+.vscode
+.idea
+.opencode
+opencode.json
+
+# Documentation and internal notes are not read at build or runtime; the site
+# content lives in lib/content.ts.
+*.md
+
+# Build/runtime noise.
+*.log
+npm-debug.log*
+yarn-error.log*
+pids
+*.pid
+*.seed
+coverage
+.DS_Store
+Thumbs.db
+
+# The image recipe itself is passed to the builder explicitly.
+Dockerfile
+.dockerignore
+docker-compose.yml

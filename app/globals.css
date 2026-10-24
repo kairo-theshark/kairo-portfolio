@@ -1,0 +1,266 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: 7 11 17;
+  --color-surface: 12 18 28;
+  --color-line: 35 49 68;
+  --color-foreground: 228 236 247;
+  --color-muted: 139 155 178;
+  --color-accent: 139 181 255;
+  --color-accent-soft: 164 199 255;
+  --color-positive: 110 231 183;
+  --color-warning: 251 191 36;
+  --color-gold: 198 166 100;
+  --color-silver: 178 190 204;
+
+  --font-sans: "IBM Plex Sans";
+  --font-mono: "JetBrains Mono";
+}
+
+* {
+  border-color: rgb(var(--color-line) / 0.65);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: rgb(var(--color-background));
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: transparent;
+  color: rgb(var(--color-foreground));
+  font-feature-settings: "ss01" 1, "cv02" 1, "cv11" 1;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgb(var(--color-accent) / 0.24);
+  color: rgb(var(--color-foreground));
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--color-accent) / 0.85);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-line));
+  border: 2px solid rgb(var(--color-background));
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-muted) / 0.5);
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-page px-5 sm:px-8;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.site-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 42% at 50% -10%, rgb(72 114 184 / 0.12), transparent 72%),
+    radial-gradient(ellipse 40% 30% at 92% 6%, rgb(80 150 200 / 0.05), transparent 70%);
+}
+
+.site-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgb(139 181 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(139 181 255 / 0.035) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 5%, transparent 74%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 5%, transparent 74%);
+}
+
+.site-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes case-in {
+  from {
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* Scroll-driven reveal: cards animate as they enter the horizontal scroller.
+   Browsers without view() timelines simply show static cards. */
+@supports (animation-timeline: view()) {
+  .case-card {
+    animation: case-in linear both;
+    animation-timeline: view(inline);
+    animation-range: entry 0% entry 40%;
+  }
+}
+
+@keyframes photo-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Same view() timeline for vertical photo grids; no JS, static without support. */
+@supports (animation-timeline: view()) {
+  .photo-reveal {
+    animation: photo-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+}
+
+@keyframes edge-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes edge-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.photo-edge-in-right {
+  animation: edge-in-right 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.photo-edge-in-left {
+  animation: edge-in-left 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.photo-mask-right {
+  mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);
+}
+
+.photo-mask-left {
+  mask-image: linear-gradient(to left, transparent 0%, black 30%, black 100%);
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, black 30%, black 100%);
+}
+
+@keyframes photo-edge-left-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes photo-edge-right-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes photo-band-in {
+  from {
+    opacity: 0;
+    transform: translateX(28px) scale(1.03);
+  }
+  to {
+    opacity: 0.55;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .photo-edge-left {
+    animation: photo-edge-left-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  .photo-edge-right {
+    animation: photo-edge-right-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  .photo-band-image {
+    animation: photo-band-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .case-card,
+  .photo-reveal,
+  .photo-edge-left,
+  .photo-edge-right,
+  .photo-edge-in-left,
+  .photo-edge-in-right,
+  .photo-band-image {
+    animation: none;
+  }
+}
