@@ -36,7 +36,7 @@ export function CopyEmail({ email, className }: CopyEmailProps) {
       type="button"
       onClick={handleCopy}
       className={cn(
-        "inline-flex min-h-11 items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.16em] text-muted/80 transition hover:text-foreground",
+        "inline-flex min-h-11 items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted/80 transition hover:text-foreground",
         className,
       )}
       aria-label={`${label}: ${email}`}

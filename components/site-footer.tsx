@@ -8,7 +8,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-line/40">
       <div className="container-page flex flex-col gap-5 py-7 sm:flex-row sm:items-center sm:justify-between">
-        <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted/80">
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted/80">
           © 2026 {siteConfig.name}
         </p>
 
@@ -17,14 +17,14 @@ export function SiteFooter() {
             <Link
               key={link.href}
               href={link.href}
-              className="inline-flex min-h-11 items-center text-[11px] text-muted transition hover:text-foreground"
+              className="inline-flex min-h-11 items-center text-[14px] text-muted transition hover:text-foreground"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[9px] uppercase tracking-[0.14em] text-muted/80">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted/80">
           {footerLinks.map((link) => (
             <a
               key={link.id}

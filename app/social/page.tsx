@@ -8,7 +8,7 @@ import { siteConfig, socialGroups, socialLinks } from "@/lib/content"
 export const metadata: Metadata = {
   title: "Социальное",
   description:
-    "Открытые каналы связи: GitHub, Telegram, YouTube, Twitch и другие площадки.",
+    "Открытые каналы связи: GitHub, Telegram, YouTube и другие площадки.",
 }
 
 export default function SocialPage() {
@@ -17,15 +17,15 @@ export default function SocialPage() {
       <PageHero
         number="04"
         kicker="social"
-        title="Открытые каналы."
-        description="Выберите удобный канал — отвечаю спокойно и по делу."
+        title="Заголовок раздела"
+        description="Одна строка описания раздела."
       />
 
       <section className="container-page pb-20" aria-labelledby="channels-title">
         <div className="max-w-2xl">
           <h2
             id="channels-title"
-            className="font-mono text-[9px] uppercase tracking-[0.22em] text-muted/80"
+            className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted/80"
           >
             контакт
           </h2>
@@ -43,18 +43,18 @@ export default function SocialPage() {
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
             <a
               href={`tel:${siteConfig.phone}`}
-              className="inline-flex min-h-11 items-center font-mono text-[12px] text-muted transition hover:text-foreground"
+              className="inline-flex min-h-11 items-center font-mono text-[11px] text-muted transition hover:text-foreground"
             >
               {siteConfig.phone}
             </a>
-            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted/80">
+            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted/80">
               телефон
             </span>
           </div>
 
           <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
-            <span className="font-mono text-[12px] text-muted">Санкт-Петербург</span>
-            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted/80">
+            <span className="font-mono text-[11px] text-muted">Город</span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted/80">
               локация
             </span>
           </div>
@@ -73,7 +73,7 @@ export default function SocialPage() {
                 <section key={group.id} aria-labelledby={titleId}>
                   <h3
                     id={titleId}
-                    className="font-mono text-[8px] uppercase tracking-[0.18em] text-muted/80"
+                    className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted/80"
                   >
                     {group.title}
                   </h3>
@@ -87,10 +87,10 @@ export default function SocialPage() {
                           rel="noreferrer"
                           className="group grid min-h-11 grid-cols-[120px_1fr_auto] items-center gap-3 py-3 sm:grid-cols-[150px_1fr_auto] sm:gap-5"
                         >
-                          <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted/80">
+                          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted/80">
                             {link.label}
                           </span>
-                          <span className="truncate text-[13px] text-foreground/85 transition group-hover:text-accent-soft">
+                          <span className="truncate text-[14px] text-foreground/85 transition group-hover:text-accent-soft">
                             {link.handle}
                           </span>
                           <ArrowUpRight
@@ -106,7 +106,7 @@ export default function SocialPage() {
             })}
           </div>
 
-          <p className="mt-10 font-mono text-[8px] uppercase tracking-[0.14em] text-muted/80">
+          <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.14em] text-muted/80">
             отвечаю в течение дня · {siteConfig.timezone}
           </p>
         </div>

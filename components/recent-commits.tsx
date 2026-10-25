@@ -20,7 +20,7 @@ export function RecentCommits({ feed }: { feed: CommitFeed }) {
   return (
     <div>
       {items.length === 0 ? (
-        <p className="py-4 font-mono text-[9px] uppercase tracking-[0.14em] text-muted/80">
+        <p className="py-4 font-mono text-[11px] uppercase tracking-[0.14em] text-muted/80">
           no data
         </p>
       ) : (
@@ -35,15 +35,15 @@ export function RecentCommits({ feed }: { feed: CommitFeed }) {
               >
                 <time
                   dateTime={item.date}
-                  className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted/80"
+                  className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted/80"
                 >
                   {formatDate(item.date.slice(0, 10))}
                 </time>
                 <span className="flex min-w-0 items-center gap-2.5">
-                  <span className="truncate text-[13px] text-foreground/90 transition group-hover:text-accent-soft">
+                  <span className="truncate text-[14px] text-foreground/90 transition group-hover:text-accent-soft">
                     {item.message}
                   </span>
-                  <span className="hidden shrink-0 font-mono text-[8px] uppercase tracking-[0.14em] text-muted/80 sm:inline">
+                  <span className="hidden shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-muted/80 sm:inline">
                     {item.repo}
                   </span>
                 </span>
@@ -57,7 +57,7 @@ export function RecentCommits({ feed }: { feed: CommitFeed }) {
         </ol>
       )}
 
-      <p className="mt-3 font-mono text-[8px] uppercase tracking-[0.14em] text-muted/80">
+      <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted/80">
         {statusLabel(feed)}
       </p>
     </div>

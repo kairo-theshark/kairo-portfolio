@@ -17,16 +17,12 @@ export function SiteHeader() {
           <span className="font-mono text-[12px] font-medium tracking-[0.28em] text-foreground transition group-hover:text-accent-soft">
             {siteConfig.name.toUpperCase()}
           </span>
-          <span className="hidden font-mono text-[9px] uppercase tracking-[0.18em] text-muted/80 sm:inline">
+          <span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-muted/80 sm:inline">
             portfolio
           </span>
         </Link>
 
-        <div className="flex items-center gap-3 font-mono text-[10px] text-muted sm:gap-5">
-          <span className="hidden items-center gap-1.5 md:inline-flex">
-            <span className="size-1.5 rounded-full bg-positive" aria-hidden="true" />
-            {siteConfig.availability}
-          </span>
+        <div className="flex items-center gap-3 font-mono text-[11px] text-muted sm:gap-5">
           <a
             href={`mailto:${siteConfig.email}`}
             className="inline-flex min-h-11 items-center transition hover:text-foreground"

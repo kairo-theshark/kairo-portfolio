@@ -24,7 +24,7 @@ export function PhotoBackdrop({
       aria-hidden="true"
       className={cn(
         "pointer-events-none absolute select-none overflow-hidden",
-        side === "right" ? "photo-mask-right photo-edge-in-right" : "photo-mask-left photo-edge-in-left",
+        side === "right" ? "photo-mask-right" : "photo-mask-left",
         className,
       )}
     >

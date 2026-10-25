@@ -60,7 +60,7 @@ app/
   loading.tsx               Loading state
   error.tsx                 Client error boundary
   not-found.tsx             404 page
-  opengraph-image.tsx       Generated Open Graph image
+  opengraph-image.png       Open Graph image
   robots.ts                 robots.txt
   sitemap.ts                sitemap.xml
   development/page.tsx      Projects
@@ -80,7 +80,7 @@ components/
   photo-backdrop.tsx        Edge-bleeding, masked hero backdrop
   photo-band.tsx            Full-width semi-transparent photo band
   project-card.tsx          Project case card
-  project-carousel.tsx      Horizontal case scroller with arrows
+  project-grid.tsx          Case grid, centred and page-width bounded
   recent-commits.tsx        GitHub commit rows
   site-header.tsx           Contact-only header
   site-footer.tsx           Footer navigation
@@ -97,7 +97,7 @@ public/
 
 ## Requirements
 
-- Node.js 26 is what the container image builds on (pinned `26.12.1-alpine3.24`); Next.js 16 itself requires Node.js 20.9 or newer. The project does not pin an `engines` range.
+- Node.js 24 is what the container image builds on (pinned `24.22.1-alpine3.24`); Next.js 16 itself requires Node.js 20.9 or newer. The project does not pin an `engines` range.
 - npm with the committed `package-lock.json`.
 - No database or external service is required to start the site. Telemetry is optional.
 
@@ -193,8 +193,8 @@ The VPS panel never falls back to demo values.
 The image is built in three stages (`deps` → `builder` → `runner`). The runtime stage is a minimal Alpine image containing the Node.js binary and the standalone build only — no npm, npx, or corepack — plus the shared libraries the musl Node binary links against (`libstdc++`, `libatomic`), and runs as a non-root user on port 3000. A `HEALTHCHECK` probes `/api/health` every 30 seconds.
 
 ```bash
-docker build -t kairo-portfolio .
-docker run --rm -p 3000:3000 --env-file .env kairo-portfolio
+docker build -t portfolio .
+docker run --rm -p 3000:3000 --env-file .env portfolio
 ```
 
 The maintainer's Compose-based deployment is not included in this repository: it expects pre-existing external Docker networks for the reverse proxy and the telemetry stack, and reads variables from `.env`. It is therefore not self-contained and will not run on a clean machine without those networks. For local work, use `npm run dev` or the `docker run` command above.

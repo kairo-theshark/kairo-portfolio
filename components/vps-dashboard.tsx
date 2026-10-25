@@ -51,12 +51,12 @@ export function VpsDashboard({ data }: VpsDashboardProps) {
       className="w-full rounded-xl border border-line/50 bg-surface/20 p-4"
     >
       <div className="flex items-center justify-between gap-4">
-        <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted/80">
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted/80">
           {data.hostname}
         </p>
         <span
           className={cn(
-            "inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.14em]",
+            "inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em]",
             statusText[data.status],
           )}
         >
@@ -67,7 +67,7 @@ export function VpsDashboard({ data }: VpsDashboardProps) {
 
       <dl className="mt-3 grid grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-4 sm:gap-x-8">
         <div>
-          <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted/80">
+          <dt className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted/80">
             Traffic
           </dt>
           <dd className="mt-1.5 text-lg font-light tracking-[-0.02em] text-foreground/75">
@@ -84,7 +84,7 @@ export function VpsDashboard({ data }: VpsDashboardProps) {
 
         {data.metrics.map((metric) => (
           <div key={metric.label}>
-            <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted/80">
+            <dt className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted/80">
               {metric.label}
             </dt>
             <dd className="mt-1.5 text-lg font-light tracking-[-0.02em] text-foreground/75">
@@ -94,10 +94,10 @@ export function VpsDashboard({ data }: VpsDashboardProps) {
         ))}
       </dl>
 
-      <div className="mt-3 flex flex-col gap-2 border-t border-line/40 pt-3 font-mono text-[10px] text-muted/80 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-3 flex flex-col gap-2 border-t border-line/40 pt-3 font-mono text-[11px] text-muted/80 sm:flex-row sm:items-center sm:justify-between">
         <span className="text-muted/80">uptime {data.uptime}</span>
 
-        <span className="shrink-0 text-[8px] uppercase tracking-[0.14em] text-muted/80">
+        <span className="shrink-0 text-[11px] uppercase tracking-[0.14em] text-muted/80">
           {stamp ? `updated ${stamp}` : "no data"}
         </span>
       </div>

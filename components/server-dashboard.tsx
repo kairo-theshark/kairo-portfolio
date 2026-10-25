@@ -51,12 +51,12 @@ export function ServerDashboard({ data }: ServerDashboardProps) {
   return (
     <div className="w-full rounded-xl border border-line/50 bg-surface/30 p-5 sm:p-7 lg:p-8">
       <div className="flex items-center justify-between gap-4">
-        <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted/80">
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted/80">
           {data.hostname}
         </p>
         <span
           className={cn(
-            "inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.14em]",
+            "inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em]",
             statusText[data.status],
           )}
         >
@@ -68,7 +68,7 @@ export function ServerDashboard({ data }: ServerDashboardProps) {
       <dl className="mt-8 grid grid-cols-2 gap-x-5 gap-y-7 sm:grid-cols-4 sm:gap-x-8">
         {data.metrics.map((metric) => (
           <div key={metric.label}>
-            <dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted/80">
+            <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted/80">
               {metric.label}
             </dt>
             <dd className="mt-2 text-2xl font-light tracking-[-0.03em] text-foreground sm:text-3xl">
@@ -91,7 +91,7 @@ export function ServerDashboard({ data }: ServerDashboardProps) {
         ))}
       </dl>
 
-      <div className="mt-8 flex flex-col gap-3 border-t border-line/40 pt-5 font-mono text-[10px] text-muted/80 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-8 flex flex-col gap-3 border-t border-line/40 pt-5 font-mono text-[11px] text-muted/80 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
           <span className="inline-flex items-center gap-1.5">
             <ArrowDown className="size-3 text-accent/70" aria-hidden="true" />
@@ -104,7 +104,7 @@ export function ServerDashboard({ data }: ServerDashboardProps) {
           <span className="text-muted/80">uptime {data.uptime}</span>
         </div>
 
-        <span className="shrink-0 text-[8px] uppercase tracking-[0.14em] text-muted/80">
+        <span className="shrink-0 text-[11px] uppercase tracking-[0.14em] text-muted/80">
           {data.status === "demo"
             ? "demo data"
             : stamp
