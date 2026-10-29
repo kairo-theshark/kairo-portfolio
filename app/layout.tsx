@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next"
 
 import "@/app/globals.css"
 
+import { ScrollCodeBackdrop } from "@/components/scroll-code-backdrop"
+import { ScrollCodeFallback } from "@/components/scroll-code-fallback"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { siteConfig } from "@/lib/content"
@@ -57,6 +59,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans antialiased">
         <div className="site-backdrop" aria-hidden="true" />
+        <ScrollCodeBackdrop />
+        <ScrollCodeFallback />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:border focus:border-accent/40 focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:text-foreground"

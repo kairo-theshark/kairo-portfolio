@@ -112,6 +112,149 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Scroll-literate backdrop: high-level code shows up first, machine words and
+   bytes only near the bottom. Lines are scattered around the page margins and
+   fly in from their screen edge as the page scrolls. */
+.code-scatter {
+  position: fixed;
+  inset: 0;
+  z-index: -5;
+  display: none;
+  overflow: hidden;
+  pointer-events: none;
+  /* 1180px is the content width (tailwind max-w-page); lines fade to a faint
+     texture where the text column begins and stay stronger in the margins. */
+  --code-edge: max(0px, calc((100vw - 1180px) / 2));
+  mask-image: linear-gradient(
+    to right,
+    #000 0,
+    #000 calc(var(--code-edge) - 40px),
+    rgb(0 0 0 / 0.26) var(--code-edge),
+    rgb(0 0 0 / 0.26) calc(100% - var(--code-edge)),
+    #000 calc(100% - var(--code-edge) + 40px),
+    #000 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0,
+    #000 calc(var(--code-edge) - 40px),
+    rgb(0 0 0 / 0.26) var(--code-edge),
+    rgb(0 0 0 / 0.26) calc(100% - var(--code-edge)),
+    #000 calc(100% - var(--code-edge) + 40px),
+    #000 100%
+  );
+}
+
+@media (min-width: 1024px) {
+  .code-scatter {
+    display: block;
+  }
+}
+
+.code-scatter-line {
+  position: absolute;
+  white-space: nowrap;
+  line-height: 1;
+  color: rgb(var(--color-accent) / 0.9);
+  opacity: var(--opacity, 0.14);
+  transform: translate3d(var(--drift, 0px), 0, 0) rotate(var(--rot, 0deg));
+  filter: blur(0.6px);
+  text-shadow: 0 0 24px rgb(var(--color-accent) / 0.2);
+}
+
+.code-tone-positive {
+  color: rgb(var(--color-positive) / 0.85);
+  text-shadow: 0 0 24px rgb(var(--color-positive) / 0.18);
+}
+
+@keyframes code-in-left {
+  0% {
+    opacity: 0;
+    transform: translate3d(calc(-100vw - 200px), 0, 0) rotate(var(--rot, 0deg));
+  }
+  70% {
+    opacity: var(--opacity, 0.14);
+  }
+  100% {
+    opacity: var(--opacity, 0.14);
+    transform: translate3d(var(--drift, 0px), 0, 0) rotate(var(--rot, 0deg));
+  }
+}
+
+@keyframes code-in-right {
+  0% {
+    opacity: 0;
+    transform: translate3d(calc(100vw + 200px), 0, 0) rotate(var(--rot, 0deg));
+  }
+  70% {
+    opacity: var(--opacity, 0.14);
+  }
+  100% {
+    opacity: var(--opacity, 0.14);
+    transform: translate3d(var(--drift, 0px), 0, 0) rotate(var(--rot, 0deg));
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  .code-scatter-line {
+    animation: code-in-left cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    animation-timeline: scroll(root block);
+    animation-range: var(--range-start, 0%) var(--range-end, 100%);
+    will-change: transform, opacity;
+  }
+
+  .code-scatter-line.from-right {
+    animation-name: code-in-right;
+  }
+}
+
+/* The byte band is scroll-driven in JS so it behaves the same in every browser:
+   hidden until the page is close to the end, then it rises into place. */
+.binary-veil {
+  transition:
+    opacity 320ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.binary-veil.code-veil-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Bottom byte band: several rows high, full width, always present, fading out
+   as it climbs. Rows are wider than the viewport, so the sides simply clip. */
+.binary-veil {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: -5;
+  opacity: 0;
+  transform: translateY(48px);
+  overflow: hidden;
+  pointer-events: none;
+  text-align: center;
+  white-space: nowrap;
+  font-size: clamp(9.6px, 0.72vw, 12.8px);
+  line-height: 2.25;
+  letter-spacing: 0.14em;
+  color: rgb(var(--color-accent) / 0.09);
+  filter: blur(1.3px);
+  mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    #000 14%,
+    rgb(0 0 0 / 0.4) 52%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    #000 14%,
+    rgb(0 0 0 / 0.4) 52%,
+    transparent 100%
+  );
+}
+
 @keyframes case-in {
   from {
     transform: translateY(14px) scale(0.985);
@@ -207,6 +350,11 @@ body {
   .case-card,
   .case-reveal {
     animation: none;
+  }
+
+  .code-scatter,
+  .binary-veil {
+    display: none;
   }
 
   .case-card,
