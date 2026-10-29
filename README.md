@@ -1,6 +1,10 @@
 <h1 align="center">Portfolio</h1>
 
 <p align="center">
+  <strong>English</strong> · <a href="README.ru.md">Русский</a>
+</p>
+
+<p align="center">
   Personal portfolio template built with Next.js, TypeScript and Tailwind CSS.
   Content, contacts and photos live in <code>lib/content.ts</code> and <code>public/photos/</code>.
 </p>
@@ -32,6 +36,7 @@ A minimal, dark, typography-first portfolio. The first screen holds one short st
 - Two read-only telemetry panels for system and network metrics: a primary host and a secondary VPS with VPN traffic.
 - Honest telemetry states: `online`, `demo`, and `offline` are always visible and never mixed.
 - Graceful degradation: when the telemetry backend is unavailable, the site keeps working and the dashboard reports `offline`.
+- Scroll-driven decorative backdrop: code lines drift in from the page margins and fade under the content column, disabled for reduced-motion users and on small screens.
 - Generated Open Graph image (1200×630 PNG), `robots.txt`, and a sitemap for the site pages.
 - Liveness endpoint for container health checks.
 - Server Components by default; client boundaries only where interaction is required.
@@ -82,6 +87,8 @@ components/
   project-card.tsx          Project case card
   project-grid.tsx          Case grid, centred and page-width bounded
   recent-commits.tsx        GitHub commit rows
+  scroll-code-backdrop.tsx  Scroll-driven decorative code background
+  scroll-code-fallback.tsx  Client scroll listener for the byte band
   site-header.tsx           Contact-only header
   site-footer.tsx           Footer navigation
   copy-email.tsx            Copy-to-clipboard email
@@ -97,7 +104,7 @@ public/
 
 ## Requirements
 
-- Node.js 24 is what the container image builds on (pinned `24.22.1-alpine3.24`); Next.js 16 itself requires Node.js 20.9 or newer. The project does not pin an `engines` range.
+- Node.js 26 is what the container image builds on (pinned `26.12.1-alpine3.24`); Next.js 16 itself requires Node.js 20.9 or newer. The project does not pin an `engines` range.
 - npm with the committed `package-lock.json`.
 - No database or external service is required to start the site. Telemetry is optional.
 
